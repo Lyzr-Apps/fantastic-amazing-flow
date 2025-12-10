@@ -113,14 +113,14 @@ function MessageBubble({
       <div
         className={`max-w-[70%] rounded-lg p-3 relative group ${
           isUser
-            ? 'bg-blue-600 text-white rounded-br-none'
+            ? 'bg-green-600 text-white rounded-br-none'
             : 'bg-slate-800 text-slate-100 rounded-bl-none'
         }`}
       >
         <p className="text-sm leading-relaxed">{message.content}</p>
         <p
           className={`text-xs mt-1 ${
-            isUser ? 'text-blue-200' : 'text-slate-400'
+            isUser ? 'text-green-200' : 'text-slate-400'
           }`}
         >
           {message.timestamp.toLocaleTimeString([], {
@@ -170,13 +170,13 @@ function ConversationCard({
       onClick={onClick}
       className={`w-full text-left p-3 rounded-lg transition-colors mb-2 ${
         active
-          ? 'bg-slate-700 border border-blue-500'
+          ? 'bg-slate-700 border border-green-500'
           : 'bg-slate-800 hover:bg-slate-700 border border-transparent'
       }`}
     >
       <p
         className={`font-medium text-sm truncate ${
-          active ? 'text-blue-300' : 'text-slate-200'
+          active ? 'text-green-300' : 'text-slate-200'
         }`}
       >
         {conversation.title}
@@ -426,7 +426,7 @@ export default function HomePage() {
             <div className="p-4 border-b border-slate-700">
               <Button
                 onClick={handleNewChat}
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
+                className="w-full bg-green-600 hover:bg-green-700 text-white"
               >
                 <Plus size={18} className="mr-2" />
                 New Chat
@@ -517,7 +517,7 @@ export default function HomePage() {
                       onClick={() => {
                         setInputValue(suggestion)
                       }}
-                      className="p-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500 rounded-lg text-left transition-colors"
+                      className="p-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-green-500 rounded-lg text-left transition-colors"
                     >
                       <p className="text-sm text-slate-200 font-medium">
                         {suggestion}
@@ -544,7 +544,7 @@ export default function HomePage() {
               <Button
                 type="submit"
                 disabled={loading || !inputValue.trim()}
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4"
+                className="bg-green-600 hover:bg-green-700 text-white px-4"
               >
                 <Send size={18} />
               </Button>
