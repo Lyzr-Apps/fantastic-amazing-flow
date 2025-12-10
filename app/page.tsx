@@ -113,14 +113,14 @@ function MessageBubble({
       <div
         className={`max-w-[70%] rounded-lg p-3 relative group ${
           isUser
-            ? 'bg-blue-500 text-white rounded-br-none'
-            : 'bg-slate-200 text-slate-900 rounded-bl-none'
+            ? 'bg-blue-600 text-white rounded-br-none'
+            : 'bg-slate-800 text-slate-100 rounded-bl-none'
         }`}
       >
         <p className="text-sm leading-relaxed">{message.content}</p>
         <p
           className={`text-xs mt-1 ${
-            isUser ? 'text-blue-100' : 'text-slate-500'
+            isUser ? 'text-blue-200' : 'text-slate-400'
           }`}
         >
           {message.timestamp.toLocaleTimeString([], {
@@ -170,19 +170,19 @@ function ConversationCard({
       onClick={onClick}
       className={`w-full text-left p-3 rounded-lg transition-colors mb-2 ${
         active
-          ? 'bg-blue-100 border border-blue-300'
-          : 'bg-slate-50 hover:bg-slate-100 border border-transparent'
+          ? 'bg-slate-700 border border-blue-500'
+          : 'bg-slate-800 hover:bg-slate-700 border border-transparent'
       }`}
     >
       <p
         className={`font-medium text-sm truncate ${
-          active ? 'text-blue-900' : 'text-slate-900'
+          active ? 'text-blue-300' : 'text-slate-200'
         }`}
       >
         {conversation.title}
       </p>
-      <p className="text-xs text-slate-500 truncate mt-1">{preview}</p>
-      <p className="text-xs text-slate-400 mt-1">{timeAgo}</p>
+      <p className="text-xs text-slate-400 truncate mt-1">{preview}</p>
+      <p className="text-xs text-slate-500 mt-1">{timeAgo}</p>
     </button>
   )
 }
@@ -412,21 +412,21 @@ export default function HomePage() {
   const isWelcomeState = currentConversation.messages.length === 1
 
   return (
-    <div className="flex h-screen bg-white overflow-hidden">
+    <div className="flex h-screen bg-black overflow-hidden">
       {/* Sidebar */}
       <div
         className={`transition-all duration-300 ${
           sidebarOpen ? 'w-64' : 'w-0'
-        } border-r border-slate-200 bg-slate-50 flex flex-col ${
+        } border-r border-slate-700 bg-neutral-900 flex flex-col ${
           isMobile && !sidebarOpen ? 'absolute' : 'relative'
         } z-50 h-full`}
       >
         {sidebarOpen && (
           <>
-            <div className="p-4 border-b border-slate-200">
+            <div className="p-4 border-b border-slate-700">
               <Button
                 onClick={handleNewChat}
-                className="w-full bg-blue-500 hover:bg-blue-600 text-white"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white"
               >
                 <Plus size={18} className="mr-2" />
                 New Chat
@@ -435,7 +435,7 @@ export default function HomePage() {
 
             <ScrollArea className="flex-1">
               <div className="p-4">
-                <p className="text-xs font-semibold text-slate-500 uppercase mb-3">
+                <p className="text-xs font-semibold text-slate-400 uppercase mb-3">
                   Conversation History
                 </p>
                 {conversations.map((conversation) => (
@@ -460,19 +460,19 @@ export default function HomePage() {
       {/* Main Chat Area */}
       <div className="flex-1 flex flex-col overflow-hidden">
         {/* Header */}
-        <div className="border-b border-slate-200 bg-white px-6 py-4 flex items-center justify-between">
+        <div className="border-b border-slate-700 bg-neutral-950 px-6 py-4 flex items-center justify-between">
           <div className="flex items-center gap-4">
             {isMobile && (
               <button
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="p-2 hover:bg-slate-100 rounded-lg"
+                className="p-2 hover:bg-slate-800 rounded-lg text-slate-300"
               >
                 {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
               </button>
             )}
             <div>
-              <h1 className="text-xl font-bold text-slate-900">Chat Assistant</h1>
-              <p className="text-xs text-slate-500">
+              <h1 className="text-xl font-bold text-white">Chat Assistant</h1>
+              <p className="text-xs text-slate-400">
                 {getTimeAgo(currentConversation.updatedAt)}
               </p>
             </div>
@@ -482,7 +482,7 @@ export default function HomePage() {
         {/* Messages Area */}
         <ScrollArea
           ref={scrollAreaRef}
-          className="flex-1 p-6 overflow-hidden"
+          className="flex-1 p-6 overflow-hidden bg-black"
         >
           <div className="max-w-4xl mx-auto">
             {currentConversation.messages.map((message) => (
@@ -496,7 +496,7 @@ export default function HomePage() {
 
             {loading && (
               <div className="flex gap-3 mb-4">
-                <div className="bg-slate-200 text-slate-900 rounded-lg rounded-bl-none p-3">
+                <div className="bg-slate-800 text-slate-200 rounded-lg rounded-bl-none p-3">
                   <LoadingDots />
                 </div>
               </div>
@@ -504,10 +504,10 @@ export default function HomePage() {
 
             {isWelcomeState && !loading && (
               <div className="mt-8 text-center">
-                <h2 className="text-2xl font-bold text-slate-900 mb-2">
+                <h2 className="text-2xl font-bold text-white mb-2">
                   Welcome to Chat Assistant
                 </h2>
-                <p className="text-slate-600 mb-6">
+                <p className="text-slate-400 mb-6">
                   Ask me anything and I will do my best to help you.
                 </p>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
@@ -517,9 +517,9 @@ export default function HomePage() {
                       onClick={() => {
                         setInputValue(suggestion)
                       }}
-                      className="p-4 bg-slate-100 hover:bg-blue-50 border border-slate-200 hover:border-blue-300 rounded-lg text-left transition-colors"
+                      className="p-4 bg-slate-800 hover:bg-slate-700 border border-slate-700 hover:border-blue-500 rounded-lg text-left transition-colors"
                     >
-                      <p className="text-sm text-slate-700 font-medium">
+                      <p className="text-sm text-slate-200 font-medium">
                         {suggestion}
                       </p>
                     </button>
@@ -531,7 +531,7 @@ export default function HomePage() {
         </ScrollArea>
 
         {/* Input Area */}
-        <div className="border-t border-slate-200 bg-white px-6 py-4">
+        <div className="border-t border-slate-700 bg-neutral-950 px-6 py-4">
           <form onSubmit={handleSendMessage} className="max-w-4xl mx-auto">
             <div className="flex gap-3">
               <Input
@@ -539,12 +539,12 @@ export default function HomePage() {
                 onChange={(e) => setInputValue(e.target.value)}
                 placeholder="Type your message..."
                 disabled={loading}
-                className="flex-1 bg-slate-50 border-slate-200 text-slate-900 placeholder:text-slate-500"
+                className="flex-1 bg-slate-900 border-slate-700 text-white placeholder:text-slate-500"
               />
               <Button
                 type="submit"
                 disabled={loading || !inputValue.trim()}
-                className="bg-blue-500 hover:bg-blue-600 text-white px-4"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4"
               >
                 <Send size={18} />
               </Button>
@@ -556,7 +556,7 @@ export default function HomePage() {
       {/* Overlay for mobile when sidebar is open */}
       {isMobile && sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-40"
+          className="fixed inset-0 bg-black bg-opacity-70 z-40"
           onClick={() => setSidebarOpen(false)}
         />
       )}
